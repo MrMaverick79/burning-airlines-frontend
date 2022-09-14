@@ -8,8 +8,8 @@ class Home extends React.Component {
         return (
             <div className="App">
 
-                <h2>Welcome to Virgin Airlines</h2>
-
+                <h2>Welcome to B U R N I N G Airlines</h2>
+                <img src="concorde.jpg" alt="A plane on fire" />
 
             </div>
         );

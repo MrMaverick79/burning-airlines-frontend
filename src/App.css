@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.column_header {
+  display: flex;
+  align-items: baseline;
+  justify-content: left;
+  
+}
+
+.seats {
+  display: inline-block;
+  width: 30vw;
+  
+ 
+}

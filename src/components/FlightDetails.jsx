@@ -65,9 +65,13 @@ class FlightDetails extends React.Component {
            <p>Flight # { this.state.flightNumber } on  {this.state.flightDetails.date} from {this.state.flightDetails.origin } to {this.state.flightDetails.destination}  </p>
 
 
-           {/* notifyParentFlight is for confirmation page */}
+           {/* notifyParentFlight is for confirmation page 
+           
+           airplane prop allow us to pass props to the seat booker
+           
+           */}
                 <p>Book your seat here</p>
-                <BookSeats airplaneDetails={this.state.flightDetails.airplane } notifyParentFlight={this.bookDone}/>
+                <BookSeats airplane={this.state.flightDetails.airplane } notifyParentFlight={this.bookDone}/>
 
                
         </div>

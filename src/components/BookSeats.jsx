@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import '../App.css'
 
 
 const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations/'
@@ -8,8 +9,8 @@ class BookSeats extends React.Component {
 
     state = {
         flightNumber: null,
-        columnList: [], //hope to generate a row List
-        rowList: [1,2,3,4,5,6,7,8,9,10], //hope to generate a column list
+        columnList: [], //hope to generate a column List
+        rowList: [1,2,3,4,5,6,7,8,9,10], //hope to generate a row list
         row: null,
         column: null,
         user: null, 
@@ -17,34 +18,63 @@ class BookSeats extends React.Component {
         user_id: 105 //hardcoded 
     }
 
-    generateSeatModel = () => {
+    generateRowModel = () => {
         //this should take the rows, columns, or number of seats and generate a form??
         const alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-        console.log('Seats ', this.props.airplaneDetails.total_seats); 
-        
-        // console.log('Columns ', this.props.airplane.column); 
-        // console.log('Rows ', this.props.airplane.row); 
+        console.log('Seats ', this.props.airplane.total_seats); 
+        const newArray = []
+        console.log('Columns ', this.props.airplane.column); 
+        console.log('Rows ', this.props.airplane.row); 
 
-        //Add to the column list (Letters) by iterating and pushing (...) until you hit the this.props.airplane.column . updtateState
-        // for (let i = 0; i < alpha.length; i++) {
-        //     const element = alpha[i];
-        //     if (element === this.props.airplane.column){
-        //         this.setState({
-        //             columnList: [element, ...this.state.columnList]
+        // Add to the column list (Letters) by iterating and pushing (...) until you hit the this.props.airplane.column . updtateState
+        for (let i = 0; i < alpha.length; i++) {
+            const element = alpha[i];
+            if (element != this.props.airplane.column){
+               newArray.push(element)
+               
                     
-        //         })
-        //         break
-        //     } else{
-        //         this.setState({
-        //             columnList: [element, ...this.state.columnList]
-                    
-        //         })
-        //     }
-            
-        // }
+            } else{
+                
+                newArray.push(element);
+                console.log(newArray);
+                return newArray
+            }
+            this.setState({
+                columnList: newArray,
+                total_seats: this.props.airplane.total_seats
+            })
+        }
         
         //generate a 3d array (of checkboxes??) usimg the column list and the total number of seats. Each seat is i??
+        
+        
+        
 
+    }
+
+    generateSeatModel = () =>{
+        let seatList= []
+        for (let i = 1; i < this.state.total_seats +1; i++) {
+            seatList.push(
+            <div className='column_header'>
+                <p>Row: {i}</p>
+            </div>  )
+            for (let j = 0; j < this.state.columnList.length; j++) {
+                
+
+               seatList.push( 
+                  <label> {this.state.columnList[j]} 
+                    <input type="radio" row={i} col={this.state.columnList[j]}  onChange={this.handleClick}></input>
+                   </label>
+
+                 )
+                
+                
+            }
+            seatList.push(<br/> )
+        }
+        return seatList
+        
     }
 
     componentDidMount(){
@@ -54,9 +84,9 @@ class BookSeats extends React.Component {
         console.log('ComponentDidMount()');
         
        
-        setTimeout(this.generateSeatModel, 3000)
+        setTimeout(this.generateRowModel, 1000)
          //below. This runs when the page is loaded, so that you don't have tro wait for the setInterval to run 
-        
+         setTimeout(this.generateSeatModel, 2000)
          
 
 
@@ -87,8 +117,14 @@ class BookSeats extends React.Component {
     } //end postReservaion
 
     //Could just do an axios post here.
-    handleRow = ( ev ) => {
-        this.setState({row: ev.target.value})
+    handleClick = ( ev ) => {
+        
+        this.setState({
+            //gets the Row and the Column from the boxes
+            row: ev.target.attributes[1].nodeValue,
+            column: ev.target.attributes[2].nodeValue
+            
+        })
     }
 
     handleCol = ( ev ) => {
@@ -112,7 +148,7 @@ class BookSeats extends React.Component {
 
        
         
-        const rowLength = this.state.rowList.length;
+        
         return(
 
         <div className="chooseSeat">
@@ -120,9 +156,10 @@ class BookSeats extends React.Component {
             <h2>Choose your seat</h2>
 
                 <form onSubmit= {this.handleSubmit }>
-
+                <div className="seats">
+                    <this.generateSeatModel/>
                     {/* I'll put two fields here and change this later */}
-                    <label >Select your row:
+                    {/* <label >Select your row:
                         <select value={this.state.row} onChange={this.handleRow}>     
                             {this.state.rowList.map((row, i)=> {
                                 return <option key={i} value={row} >{row}</option>
@@ -137,12 +174,12 @@ class BookSeats extends React.Component {
                             })}          
                             
                         </select>
-                    </label>
+                    </label> */}
 
                                               
                  
                     <button>Submit</button>
-
+                 </div>       
                 </form>
 
         </div>
