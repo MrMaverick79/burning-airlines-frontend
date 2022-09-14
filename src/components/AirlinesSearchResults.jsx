@@ -1,7 +1,9 @@
 
 import React from "react";
+// import FlightDetails from "./FlightDetails";
 
 import axios from "axios";
+import {Route, HashRouter as Router, Link} from 'react-router-dom';
 
 // TODO: just trail version, need to change
 const AIRLINE_FLIGHT_URL = 'http://localhost:3000/flights.json';
@@ -11,7 +13,8 @@ function DesiredFlightResults(props){
         <li>
             <strong>Date: </strong>{props.info.date}
             <br />
-            <strong>Flight: </strong>{props.info.flight_number}
+            <strong>Flight: </strong>
+            <Link to={"/flights/" + props.info.flight_number} >{props.info.flight_number}</Link>
             <br />
             <strong>From: </strong>{props.info.origin}
             <br />
@@ -28,6 +31,7 @@ class AirlinesSearchResults extends React.Component {
         origin: [],
         destination: [],
         desiredFlights: [],
+        flightNumber: [],
         loading: true,
         error: null
     }
@@ -50,6 +54,9 @@ class AirlinesSearchResults extends React.Component {
                     // return <p>Sorry, we don't have this line recently</p>;
                 }
             }
+            
+            console.log('desiredFlight', desiredFlightsData)
+            console.log('desiredFlight', desiredFlightsData[0].flight_number)
 
             // TODO? if type the place not exist, return Sorry, there was an error loading your results.
 
@@ -62,6 +69,7 @@ class AirlinesSearchResults extends React.Component {
                 origin: originData,
                 destination: destinationData,
                 desiredFlights: desiredFlightsData,
+                flightNumber: desiredFlightsData[0].flight_number,
                 loading: false
             });
 
@@ -82,6 +90,7 @@ class AirlinesSearchResults extends React.Component {
         this.searchAirlineResult(this.props.match.params.queryOrigin, this.props.match.params.queryDestination);
     } // componentDidMount()
 
+    
     render(){
 
         // early return when there is an error
@@ -95,20 +104,21 @@ class AirlinesSearchResults extends React.Component {
 
         return (
             <div>
-                <h3>Flight Search Results</h3>
-                <h3>Start from {this.props.match.params.queryOrigin}</h3>
-                <h3>Arrive to {this.props.match.params.queryDestination}</h3>
+                    <h3>Flight Search Results</h3>
+                    <h3>Start from {this.props.match.params.queryOrigin}</h3>
+                    <h3>Arrive to {this.props.match.params.queryDestination}</h3>
 
-                {
-                    this.state.loading
-                    ?
-                    <p>Loading flights...</p>
-                    :
-                    <ul>
-                        {this.state.desiredFlights.map(s => <DesiredFlightResults key={s.id} info={s} />)}
-                    </ul>
-                }
+                    {
+                        this.state.loading
+                        ?
+                        <p>Loading flights...</p>
+                        :
+                        <ul>
+                            {this.state.desiredFlights.map(s => <DesiredFlightResults key={s.id} info={s} />)}
+                        </ul>
+                    }
 
+                    {/* <Route exact path="/flights/15" component={ FlightDetails } /> */}
             </div>
         );
 
