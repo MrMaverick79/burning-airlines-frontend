@@ -7,13 +7,43 @@ class BookSeats extends React.Component {
 
     state = {
         flightNumber: null,
-        columnList: ["A", "B", "C", "D", 'E'], //hope to generate a row List
+        columnList: [], //hope to generate a row List
         rowList: [1,2,3,4,5,6,7,8,9,10], //hope to generate a column list
         row: null,
         column: null,
         user: null, 
         total_seats: null,
-        user_id: null 
+        user_id: 105 //hardcoded 
+    }
+
+    generateSeatModel = () => {
+        //this should take the rows, columns, or number of seats and generate a form??
+        const alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        console.log('Seats ', this.props.airplaneDetails.total_seats); 
+        
+        // console.log('Columns ', this.props.airplane.column); 
+        // console.log('Rows ', this.props.airplane.row); 
+
+        //Add to the column list (Letters) by iterating and pushing (...) until you hit the this.props.airplane.column . updtateState
+        // for (let i = 0; i < alpha.length; i++) {
+        //     const element = alpha[i];
+        //     if (element === this.props.airplane.column){
+        //         this.setState({
+        //             columnList: [element, ...this.state.columnList]
+                    
+        //         })
+        //         break
+        //     } else{
+        //         this.setState({
+        //             columnList: [element, ...this.state.columnList]
+                    
+        //         })
+        //     }
+            
+        // }
+        
+        //generate a 3d array (of checkboxes??) usimg the column list and the total number of seats. Each seat is i??
+
     }
 
     componentDidMount(){
@@ -22,11 +52,12 @@ class BookSeats extends React.Component {
         //should be initiated from componentDidMount()
         console.log('ComponentDidMount()');
         
+       
+        setTimeout(this.generateSeatModel, 3000)
          //below. This runs when the page is loaded, so that you don't have tro wait for the setInterval to run 
         
-        
+         
 
-         //A seperate axios request for 
 
         //Poll the server every 2 seconds to get any secrets that were added to the server (form other users, for example) since the page last poll. 
         //This is the 'old school' way of checking whether the Server has been updated.
@@ -40,6 +71,7 @@ class BookSeats extends React.Component {
         console.log('We are in post Reservation, trying to book ', row, col);
     
         try{
+            
             const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: row, column: col, user_id: 105, flight_id: 89 })
             console.log('Post response', res.data);
 
@@ -74,7 +106,7 @@ class BookSeats extends React.Component {
 
     render(){
 
-        
+       
         
         const rowLength = this.state.rowList.length;
         return(
