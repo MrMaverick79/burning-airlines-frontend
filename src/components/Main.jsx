@@ -9,6 +9,7 @@ import AirlinesSearchResults from "./AirlinesSearchResults";
 // import BookSeats from "./BookSeats";
 
 import FlightDetails from "./FlightDetails";
+import ReserveDone from "./ReserveDone"
 
 
 
@@ -37,7 +38,7 @@ class Main extends React.Component {
                     <Route exact path="/search" component={AirlinesSearch} />
                     <Route exact path="/search/:queryOrigin/:queryDestination" component={AirlinesSearchResults} />
                     <Route exact path="/flights/:queryFlight" component={ FlightDetails } />
-                    
+                    <Route exact path="/done/:bookFlight" component={ ReserveDone } />                    
 
                 </Router>
 

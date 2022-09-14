@@ -46,6 +46,13 @@ class FlightDetails extends React.Component {
         }
 
     } 
+
+    // for confirmation page
+    bookDone = (data) => {
+        this.props.history.push(`/done/${data}`)
+    }
+
+    
     
    
     render(){
@@ -58,8 +65,9 @@ class FlightDetails extends React.Component {
            <p>Flight # { this.state.flightNumber } on  {this.state.flightDetails.date} from {this.state.flightDetails.origin } to {this.state.flightDetails.destination}  </p>
 
 
+           {/* notifyParentFlight is for confirmation page */}
                 <p>Book your seat here</p>
-                <BookSeats airplaneDetails={this.state.flightDetails.airplane }/>
+                <BookSeats airplaneDetails={this.state.flightDetails.airplane } notifyParentFlight={this.bookDone}/>
 
                
         </div>

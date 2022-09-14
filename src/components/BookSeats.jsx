@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
+
 const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations/'
 
 class BookSeats extends React.Component {
@@ -98,6 +99,9 @@ class BookSeats extends React.Component {
         ev.preventDefault() //stops page from reloading
         console.log('Form submitted with: ',this.state.row, this.state.column)
         this.postReservation( this.state.row, this.state.column)
+
+        // for confirmation page
+        this.props.notifyParentFlight(this.state.flightNumber)
     }
 
     //this comonent will send a request to the server to make a reservation
