@@ -7,18 +7,24 @@ import React from "react";
 class SearchForm extends React.Component {
     
     state = {
-        searchQuery: ''
+        searchQueryOrigin: '',
+        searchQueryDestination: ''
     }
     
-    handleInput = (event) => {
-        this.setState({searchQuery: event.target.value});
+    handleInputOrigin = (event) => {
+        this.setState({searchQueryOrigin: event.target.value.toUpperCase()});
+    } // handleInput()
+
+    handleInputDestination = (event) => {
+        this.setState({searchQueryDestination: event.target.value.toUpperCase()});
     } // handleInput()
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Form submitted', this.state.searchQuery);
+        console.log('Form submitted Origin', this.state.searchQueryOrigin);
+        console.log('Form submitted Destination', this.state.searchQueryDestination);
 
-        this.props.notifyParent(this.state.searchQuery);
+        this.props.notifyParent(this.state.searchQueryOrigin, this.state.searchQueryDestination);
     }
 
 
@@ -27,11 +33,11 @@ class SearchForm extends React.Component {
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <input type="text" onChange={this.handleInput} placeholder="from" />
+                <input type="text" onChange={this.handleInputOrigin} placeholder="from" />
+                <br />
+                <input type="text" onChange={this.handleInputDestination} placeholder="to" />
                 <br /><br />
                 <button>Search Flights</button>
-                
-
             </form>
         );
 
