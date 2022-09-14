@@ -6,7 +6,7 @@ import {Route, HashRouter as Router, Link} from 'react-router-dom';
 import Home from "./Home";
 import AirlinesSearch from "./AirlinesSearch";
 import AirlinesSearchResults from "./AirlinesSearchResults";
-import BookSeats from "./BookSeats";
+// import BookSeats from "./BookSeats";
 
 import FlightDetails from "./FlightDetails";
 
