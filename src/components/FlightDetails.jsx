@@ -59,7 +59,7 @@ class FlightDetails extends React.Component {
 
 
                 <p>Book your seat here</p>
-                <BookSeats />
+                <BookSeats airplaneDetails={this.state.flightDetails.airplane }/>
 
                
         </div>
