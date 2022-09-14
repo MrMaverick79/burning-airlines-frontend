@@ -1,81 +1,61 @@
 
+import axios from "axios";
 import React from "react";
 import BookSeats from './BookSeats'
 
-import axios from "axios";
-
-const AIRLINE_FLIGHT_URL = 'http://localhost:3000/flights.json';
+const RAILS_FLIGHT_BASE_URL = 'http://localhost:3000/flights/'
 
 class FlightDetails extends React.Component {
 
-    state = {
-        flightsDetails: [],
-        loading: true,
-        error: null
+    state ={
+        loading: false,
+        flightNumber: "",
+        flightDetails: {}
     }
 
-    AirlineResultDetails = async (flightNumber) => {
-
-        console.log('AirlineResultDetails()', flightNumber);
-
-        try {
-            const res = await axios.get(AIRLINE_FLIGHT_URL);
-            console.log('POST response FlightDetails', res.data)
-
-            const FlightsDetailsData = []
-            for (let i = 0; i < res.data.length; i++){
-                if ((res.data)[i].flight_number === parseInt(flightNumber)){
-                    FlightsDetailsData.push((res.data)[i]);
-                    // FlightsDetailsData=(res.data)[i];
-                }
-            }
-
-            console.log('FlightsDetailsData()', FlightsDetailsData);
-
-            this.setState({
-                flightsDetails: FlightsDetailsData[0],
-                loading: false
-            })
-
-        } catch(err){
-            console.error('Error saving your desired flight to backend', err)
-            this.setState({error: err});
-        }
-        
-    } // AirlineResultDetails()
-
-
-    componentDidMount() {
-        console.log('componentDidMount');
-        this.AirlineResultDetails(this.props.match.params.queryFlight);
-    }
+    
     
 
+    componentDidMount() {
+        //Grab all the flight details on page load
+        console.log('Component did mount() - FlightDetails');
 
+        console.log('this.props on the FlightDetails Page:' , this.props.match.params.queryFlight);
 
+        
+        this.setState({
+            
+            flightNumber: this.props.match.params.queryFlight})
 
+        this.getFlightDetails(this.props.match.params.queryFlight)
+        
 
+    }
 
+    getFlightDetails = async(flightNumber) => {
+        console.log('We are now requesting flight details for flight#', flightNumber);
 
+        try{ 
+            const res = await axios.get(RAILS_FLIGHT_BASE_URL + flightNumber +'.json')
+            console.log('Get response', res.data);
+            this.setState({
+                flightDetails: res.data})
 
+        } catch (err ) {
+            console.log('There was an error when trying to find these flight details', err)
+        }
+
+    } 
+    
+   
     render(){
 
-        // early return when there is an error
-        if(this.state.error !== null){
-            return <p>Sorry, there was an error loading your results. Try again.</p>;
-        }
+
 
         return (
         <div className="flightContainer">
-            <p> Flight details</p>
-            <p> {this.state.flightsDetails.date}</p>
-
-
-
-
-
-
-
+           
+           <p>Flight # { this.state.flightNumber } on  {this.state.flightDetails.date} from {this.state.flightDetails.origin } to {this.state.flightDetails.destination}  </p>
 
 
                 <p>Book your seat here</p>
