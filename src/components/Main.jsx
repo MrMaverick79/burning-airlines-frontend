@@ -41,7 +41,6 @@ class Main extends React.Component {
 
                 </Router>
 
-                <BookSeats />
             </div>
         );
 
