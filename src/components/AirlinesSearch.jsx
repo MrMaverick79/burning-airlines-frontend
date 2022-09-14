@@ -10,10 +10,11 @@ import SearchForm from "./SearchForm";
 class AirlinesSearch extends React.Component {
     
     // This method will be given as a prop to the child component
-    // TODO: just trail version, need to change variables
-    searchAirline = (text) => {
-        console.log('postAirline()', text);
-        this.props.history.push(`/search/${text}`);
+    searchAirline = (origin, destination) => {
+        console.log('searchAirline orgin()', origin);
+        console.log('searchAirline destination()', destination);
+        // go to the url like /search/SYD/MEL
+        this.props.history.push(`/search/${origin}/${destination}`);
     } // postAirline()
 
 
