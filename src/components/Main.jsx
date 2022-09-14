@@ -7,6 +7,7 @@ import AirlinesSearch from "./AirlinesSearch";
 
 import {Route, HashRouter as Router, Link} from 'react-router-dom';
 import AirlinesSearchResults from "./AirlinesSearchResults";
+import BookSeats from "./BookSeats";
 
 class Main extends React.Component {
 
@@ -31,9 +32,11 @@ class Main extends React.Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/search" component={AirlinesSearch} />
                     <Route exact path="/search/:queryOrigin/:queryDestination" component={AirlinesSearchResults} />
-                    <Route exact path="/flights/:query" component={ FlightDetails } />
+                    {/* <Route exact path="/flights/:query" component={ FlightDetails } /> */}
 
                 </Router>
+
+                <BookSeats />
             </div>
         );
 
