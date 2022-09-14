@@ -5,7 +5,7 @@ import React from "react";
 import axios from "axios";
 import {Route, HashRouter as Router, Link} from 'react-router-dom';
 
-// TODO: just trail version, need to change
+// flights.json url
 const AIRLINE_FLIGHT_URL = 'http://localhost:3000/flights.json';
 
 function DesiredFlightResults(props){
@@ -14,7 +14,7 @@ function DesiredFlightResults(props){
             <strong>Date: </strong>{props.info.date}
             <br />
             <strong>Flight: </strong>
-            <Link to={"/flights/" + props.info.flight_number} >{props.info.flight_number}</Link>
+            <Link to={"/flights/" + props.info.flight_number}>{props.info.flight_number}</Link>
             <br />
             <strong>From: </strong>{props.info.origin}
             <br />
@@ -31,7 +31,6 @@ class AirlinesSearchResults extends React.Component {
         origin: [],
         destination: [],
         desiredFlights: [],
-        flightNumber: [],
         loading: true,
         error: null
     }
@@ -55,10 +54,8 @@ class AirlinesSearchResults extends React.Component {
                 }
             }
             
-            console.log('desiredFlight', desiredFlightsData)
-            console.log('desiredFlight', desiredFlightsData[0].flight_number)
-
-            // TODO? if type the place not exist, return Sorry, there was an error loading your results.
+            // console.log('desiredFlight', desiredFlightsData)
+            // console.log('desiredFlight', desiredFlightsData[0].flight_number)
 
             // if no matching airline
             // if(desiredFlightsData.length === 0){
@@ -69,7 +66,6 @@ class AirlinesSearchResults extends React.Component {
                 origin: originData,
                 destination: destinationData,
                 desiredFlights: desiredFlightsData,
-                flightNumber: desiredFlightsData[0].flight_number,
                 loading: false
             });
 
@@ -80,7 +76,7 @@ class AirlinesSearchResults extends React.Component {
             this.setState({error: err});
         }
     
-    } // postAirline()
+    } // searchAirlineResult()
     
     
 
@@ -90,7 +86,7 @@ class AirlinesSearchResults extends React.Component {
         this.searchAirlineResult(this.props.match.params.queryOrigin, this.props.match.params.queryDestination);
     } // componentDidMount()
 
-    
+
     render(){
 
         // early return when there is an error
@@ -118,7 +114,6 @@ class AirlinesSearchResults extends React.Component {
                         </ul>
                     }
 
-                    {/* <Route exact path="/flights/15" component={ FlightDetails } /> */}
             </div>
         );
 

@@ -16,7 +16,7 @@ class BookSeats extends React.Component {
         console.log('We are in post Reservation, trying to book ', row, col);
     
         try{
-            const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: row, column: col, user_id: 95, flight_id: 79 })
+            const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: row, column: col, user_id: 15, flight_id: 15 })
             console.log('Post response', res.data);
 
             //setState here to show reservation?
@@ -44,7 +44,7 @@ class BookSeats extends React.Component {
         this.postReservation( this.state.row, this.state.column)
     }
 
-    //this comonent will send a request to the server to make a reservation
+    // this comonent will send a request to the server to make a reservation
 
     render(){
 
@@ -52,7 +52,7 @@ class BookSeats extends React.Component {
 
         <div className="chooseSeat">
 
-            {/* <h2>Choose your seat</h2>
+            <h2>Choose your seat</h2>
 
                 <form onSubmit= {this.handleSubmit }>
 
@@ -61,7 +61,7 @@ class BookSeats extends React.Component {
                     <input type="text" name='row' placeholder='row(#)'onChange={this.handleRow}/>
                     <button>Submit</button>
 
-                </form> */}
+                </form>
 
         </div>
 
