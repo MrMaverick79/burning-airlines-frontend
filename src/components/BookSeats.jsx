@@ -21,8 +21,10 @@ class BookSeats extends React.Component {
         //so our AJAX request 
         //should be initiated from componentDidMount()
         console.log('ComponentDidMount()');
+        
          //below. This runs when the page is loaded, so that you don't have tro wait for the setInterval to run 
-
+        
+        
 
          //A seperate axios request for 
 
@@ -71,6 +73,9 @@ class BookSeats extends React.Component {
 
 
     render(){
+
+        
+        
         const rowLength = this.state.rowList.length;
         return(
 
