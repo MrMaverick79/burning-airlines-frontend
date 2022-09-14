@@ -3,20 +3,24 @@ import React from 'react';
 import '../App.css'
 
 
-const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations/'
+const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations.json/'
 
 class BookSeats extends React.Component {
 
     state = {
         flightNumber: null,
+        flightId: 108,
         columnList: [], //hope to generate a column List
         rowList: [1,2,3,4,5,6,7,8,9,10], //hope to generate a row list
-        row: null,
-        column: null,
-        user: null, 
+        row: 0,
+        column: '',
+        user: 'Kris', 
         total_seats: null,
-        user_id: 105 //hardcoded 
+        user_id: 117 //hardcoded 
     }
+
+    //TODO - find user details from anopther axios request
+    
 
     generateRowModel = () => {
         //this should take the rows, columns, or number of seats and generate a form??
@@ -98,15 +102,15 @@ class BookSeats extends React.Component {
 
     }
 
-    postReservation = async( row, col ) => {
-        console.log('We are in post Reservation, trying to book ', row, col);
+    postReservation = async(  ) => {
+        console.log('We are in post Reservation, trying to book ', this.state.row, this.state.column);
     
         try{
             
-            const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: row, column: col, user_id: 105, flight_id: 89 })
+            const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: this.state.row, column: this.state.column, user_id: this.state.user_id, flight_id: this.state.flightId })
             console.log('Post response', res.data);
 
-            //setState here to show reservation?
+            
         } catch( err ) {
             console.log('There was an error when trying to post a reservation', err);
         }
@@ -134,7 +138,8 @@ class BookSeats extends React.Component {
     handleSubmit = ( ev ) => {
         ev.preventDefault() //stops page from reloading
         console.log('Form submitted with: ',this.state.row, this.state.column)
-        this.postReservation( this.state.row, this.state.column)
+        //Book a seat in the backend
+        this.postReservation()
 
         // for confirmation page
         this.props.notifyParentFlight(this.state.flightNumber)

@@ -23,7 +23,7 @@ class Main extends React.Component {
                 <Router>
 
                     <header>
-                        <h1>Virgin Airlines</h1>
+                        <h1>B U R N I N G Airlines</h1>
                         <nav>
                             <Link to="/">Home</Link>
                             {' '}|{' '}
