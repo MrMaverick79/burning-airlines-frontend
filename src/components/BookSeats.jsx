@@ -214,7 +214,7 @@ class BookSeats extends React.Component {
         this.postReservation()
 
         // for confirmation page
-        this.props.notifyParentFlight(this.state.flightNumber)
+        this.props.notifyParentFlight()
     }
 
     //this comonent will send a request to the server to make a reservation
