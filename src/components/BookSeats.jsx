@@ -3,7 +3,7 @@ import React from 'react';
 import '../App.css'
 
 
-const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations.json/'
+const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations'
 
 class BookSeats extends React.Component {
 
@@ -16,7 +16,7 @@ class BookSeats extends React.Component {
         column: '',
         user: 'Kris', 
         total_seats: null,
-        user_id: 49 //hardcoded 
+        user_id: 144 //hardcoded 
     }
 
     //TODO - find user details from anopther axios request and setState for the user_id &&deal with the FlightId in the smae way. Are these in the AirlinesSearchResult parent?
@@ -113,11 +113,12 @@ class BookSeats extends React.Component {
 
     postReservation = async(  ) => {
         console.log('We are in post Reservation, trying to book ', this.state.row, this.state.column);
+        console.log('We are in post Reservation, withFlightId ', this.props.flightDetails.id);
     
         try{
             
-            const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: this.state.row, column: this.state.column, user_id: this.state.user_id, flight_id: this.state.flightId })
-            console.log('Post response Bookseats', res.data);
+            const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: this.state.row, column: this.state.column, user_id: this.state.user_id, flight_id: this.props.flightDetails.id })
+            console.log('Post response', res.data);
 
             
         } catch( err ) {
