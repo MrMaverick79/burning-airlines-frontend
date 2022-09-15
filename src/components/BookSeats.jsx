@@ -5,6 +5,8 @@ import '../App.css'
 
 const RAILS_RESERVATIONS_BASE_URL = 'http://localhost:3000/reservations'
 
+const RAILS_USER_BASE_URL = 'http://localhost:3000/find/'
+
 class BookSeats extends React.Component {
 
     state = {
@@ -16,11 +18,29 @@ class BookSeats extends React.Component {
         column: '',
         user: 'Kris', 
         total_seats: null,
-        user_id: 144 //hardcoded 
+        user_id: 144, //hardcoded
+        reservedSeats: {} 
     }
 
     //TODO - find user details from anopther axios request and setState for the user_id &&deal with the FlightId in the smae way. Are these in the AirlinesSearchResult parent?
     
+    getCurrentReservations = () =>{
+        const reserveObj = {} 
+        
+        console.log('The reservations on this flight are ', this.props.flightDetails.reservations);
+        const reservations = this.props.flightDetails.reservations;
+        console.log('Here is reservations array:', reservations);
+
+        reservations.forEach( e =>{ 
+            reserveObj[e.row] = e.column
+        })
+        console.log('The testObject is ', reserveObj);
+
+        this.setState({
+            reservedSeats:{...reserveObj}
+        })
+        
+    }
 
     generateRowModel = () => {
         //this should take the rows, columns, or number of seats and generate a form??
@@ -65,15 +85,31 @@ class BookSeats extends React.Component {
             <div className='column_header'>
                 <p>Row: {i}</p>
             </div>  )
+
+            //test whether the row exists in rerved seats
+            
+
             for (let j = 0; j < this.state.columnList.length; j++) {
                 
+                if(this.state.reservedSeats[i] === this.state.columnList[j]){
+                    console.log('I have found a reserved seat', this.state.reservedSeats[i], 'and', this.state.columnList[j]);
+                    seatList.push(
 
-               seatList.push( 
-                  <label> {this.state.columnList[j]} 
-                    <input type="checkbox" row={i} col={this.state.columnList[j]}  onChange={this.handleClick}></input>
-                   </label>
+                        <p>Seat Reserved by </p>
+                    )
+                } else {
 
-                 )
+                    seatList.push( 
+                        <label> {this.state.columnList[j]} 
+                          <input type="checkbox" row={i} col={this.state.columnList[j]}  onChange={this.handleClick}></input>
+                         </label>
+      
+                       )
+
+
+                }
+
+              
                 
                 
             }
@@ -83,24 +119,50 @@ class BookSeats extends React.Component {
         
     }
 
+    getUserId = async() => {
+
+        try{
+            const nameRes = await axios.get(RAILS_USER_BASE_URL + this.state.user + '.json')
+            console.log('The results for the user search were', nameRes.data);
+            console.log('Here is the userID from  the user search:', nameRes.data.id);
+            this.setState({
+                user_id: nameRes.data.id
+            }) 
+
+
+        } catch (err){
+            console.log('There has been an error trying to find this user', err);
+
+        }
+
+
+        return 143
+
+    }
+
     componentDidMount(){
         //We want to load the list of Secrets from the backend as soon as the frontent loads,
         //so our AJAX request 
         //should be initiated from componentDidMount()
         console.log('ComponentDidMount()');
 
+        
+
         console.log('The new flightDetails props are ', this.props.flightDetails);
 
         this.setState({
-            flightId: this.props.flightDetails.id
+            flightId: this.props.flightDetails.id,
+           
         })
         
-     
+        this.getUserId()
 
         setTimeout(this.generateRowModel, 1000)
+        
          //below. This runs when the page is loaded, so that you don't have tro wait for the setInterval to run 
          setTimeout(this.generateSeatModel, 2000)
          
+         setTimeout(this.getCurrentReservations, 2000)
 
 
         //Poll the server every 2 seconds to get any secrets that were added to the server (form other users, for example) since the page last poll. 
@@ -167,6 +229,7 @@ class BookSeats extends React.Component {
         return(
 
         <div className="chooseSeat">
+            
 
             <h2>Hi {this.state.user}. please choose your seat</h2>
 
