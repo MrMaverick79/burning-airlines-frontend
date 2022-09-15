@@ -2,6 +2,15 @@
 import React from "react";
 
 class ReserveDone extends React.Component {
+
+    componentDidMount(){
+        console.log('ReserveDone Componentdidmount', this.props)
+    }
+    
+    
+    
+    
+    
     render(){
 
         return (

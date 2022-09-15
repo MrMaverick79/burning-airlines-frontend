@@ -108,7 +108,7 @@ class BookSeats extends React.Component {
         try{
             
             const res = await axios.post(RAILS_RESERVATIONS_BASE_URL, {row: this.state.row, column: this.state.column, user_id: this.state.user_id, flight_id: this.state.flightId })
-            console.log('Post response', res.data);
+            console.log('Post response Bookseats', res.data);
 
             
         } catch( err ) {
