@@ -41,7 +41,9 @@ class Main extends React.Component {
                     <Route exact path="/done" component={ ReserveDone } />                    
 
                 </Router>
-
+                <footer>
+                    &copy; Burning Airlines 2022
+                </footer>
             </div>
         );
 
