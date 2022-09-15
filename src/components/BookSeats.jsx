@@ -18,7 +18,7 @@ class BookSeats extends React.Component {
         column: '',
         user: 'Kris', 
         total_seats: null,
-        user_id: 144, //hardcoded
+        user_id: 0, //hardcoded
         reservedSeats: {} 
     }
 
