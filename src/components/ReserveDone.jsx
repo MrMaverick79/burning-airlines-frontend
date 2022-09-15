@@ -17,7 +17,8 @@ class ReserveDone extends React.Component {
 
     componentDidMount(){
         // console.log('ReserveDone Componentdidmount', this.props)
-        this.getReserveFlight()
+        // wait the data to load
+        setTimeout(this.getReserveFlight, 50)
     }
 
     getReserveFlight = async() => {
