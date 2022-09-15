@@ -10,18 +10,13 @@ const AIRLINE_FLIGHT_URL = 'http://localhost:3000/flights.json';
 
 function DesiredFlightResults(props){
     return (
-        <li>
-            <strong>Date: </strong>{props.info.date}
-            <br />
-            <strong>Flight: </strong>
-            <Link to={"/flights/" + props.info.flight_number}>{props.info.flight_number}</Link>
-            <br />
-            <strong>From: </strong>{props.info.origin}
-            <br />
-            <strong>To: </strong>{props.info.destination}
-            <br /><br />
-            {/* <strong>Plane</strong>{props.info.origin} */}
-        </li>
+        <div className="searchResult">
+            <li> <strong>Date: </strong>{props.info.date} </li>
+            <li><strong>Flight: </strong>      <Link to={"/flights/" + props.info.flight_number}>{props.info.flight_number}</Link></li>
+            <li><strong>Origin: </strong>{props.info.origin}</li>
+            <li><strong>Destination: </strong>{props.info.destination} </li>
+
+        </div>
     )
 }
 
@@ -101,17 +96,19 @@ class AirlinesSearchResults extends React.Component {
         return (
             <div>
                     <h3>Flight Search Results</h3>
-                    <h3>Start from {this.props.match.params.queryOrigin}</h3>
-                    <h3>Arrive to {this.props.match.params.queryDestination}</h3>
+                    <h3>Start from {this.props.match.params.queryOrigin} {`\>>`} Arrive in {this.props.match.params.queryDestination}</h3>
+                    
 
                     {
                         this.state.loading
                         ?
                         <p>Loading flights...</p>
                         :
-                        <ul>
-                            {this.state.desiredFlights.map(s => <DesiredFlightResults key={s.id} info={s} />)}
-                        </ul>
+                        <div className="container">
+                            <ul>
+                                {this.state.desiredFlights.map(s => <DesiredFlightResults key={s.id} info={s} />)}
+                            </ul>
+                        </div>
                     }
 
             </div>

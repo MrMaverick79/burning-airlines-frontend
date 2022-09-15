@@ -32,7 +32,7 @@ class SearchForm extends React.Component {
     render(){
 
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="searchForm" onSubmit={this.handleSubmit}>
                 <input type="text" onChange={this.handleInputOrigin} placeholder="from" />
                 <br />
                 <input type="text" onChange={this.handleInputDestination} placeholder="to" />

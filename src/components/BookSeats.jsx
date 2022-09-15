@@ -105,7 +105,7 @@ class BookSeats extends React.Component {
                          </label>
       
                        )
-
+                    
 
                 }
 
@@ -141,9 +141,7 @@ class BookSeats extends React.Component {
     }
 
     componentDidMount(){
-        //We want to load the list of Secrets from the backend as soon as the frontent loads,
-        //so our AJAX request 
-        //should be initiated from componentDidMount()
+       
         console.log('ComponentDidMount()');
 
         
@@ -231,7 +229,7 @@ class BookSeats extends React.Component {
         <div className="chooseSeat">
             
 
-            <h2>Hi {this.state.user}. please choose your seat</h2>
+            <h2>Hi {this.state.user}! Please choose your seat</h2>
 
                 <form onSubmit= {this.handleSubmit }>
                 <div className="seats">

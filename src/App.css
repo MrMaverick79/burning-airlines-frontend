@@ -2,9 +2,30 @@
   text-align: center;
 }
 
+a {
+  color: blue;
+
+}
+
+img{
+  box-shadow: 6px 6px rgba(0, 0, 0, 0.6);
+}
+
+a:hover {
+  color: red;
+
+}
+
+
+header{
+  background-image: url('../public/flamebanner.jpg');
+  background-position-y: -4vh;
+}
+
 .column_header {
   display: inline-flex;
   padding-right: 5vw ;
+  text-align: left;
 
   
 }
@@ -17,11 +38,70 @@
 
 }
 
-input {
-  width: 4vw;
-  height: 4vh;
+.seats input {
+  width: 6vw;
+  height: 6vh;
  
 }
 
+.searchForm input{
+  width: auto;
+  margin: 15px;
+  border-radius: 5px;
+}
+
+.searchForm {
+  border: 2px solid black;
+  width: 15vw;
+}
+
+.searchForm button{
+  margin-bottom: 20px;
+}
 
 
+.container{
+  display: flex;
+  width: 100vw;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.searchResult{
+  border: 2px dotted black;
+  margin: 15px;
+  width: 20vw;
+  line-height: 1.5;
+  padding: 10px;
+}
+
+li{
+  list-style: none;
+  text-align: left;
+}
+
+footer{
+  height: 10vh;
+  margin-top: 5vh;
+}
+
+button{
+  margin: 25px;
+  padding: 10px;
+  background-color: red;
+  color: aliceblue;
+  border: 2px solid black;
+  border-radius: 50px;
+}
+
+button:hover{
+  cursor:pointer;
+  color: black;
+  border: 2px solid whitesmoke;
+}
+
+label{
+  font-size: 0.8em;
+}

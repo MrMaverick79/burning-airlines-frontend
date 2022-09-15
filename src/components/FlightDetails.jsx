@@ -63,7 +63,7 @@ class FlightDetails extends React.Component {
         return (
         <div className="flightContainer">
            
-           <p>Flight # { this.state.flightNumber } on  {this.state.flightDetails.date} from {this.state.flightDetails.origin } to {this.state.flightDetails.destination}  </p>
+           <h3>Flight # { this.state.flightNumber } on  {this.state.flightDetails.date} from {this.state.flightDetails.origin } to {this.state.flightDetails.destination}  </h3>
 
 
            {/* notifyParentFlight is for confirmation page 
@@ -73,7 +73,7 @@ class FlightDetails extends React.Component {
            some duplication below with flightDetails and airplane 
            
            */}
-                <p>Book your seat here</p>
+                
                 <BookSeats airplane={this.state.flightDetails.airplane } 
                 flightDetails ={this.state.flightDetails} notifyParentFlight={this.bookDone}/>
 
