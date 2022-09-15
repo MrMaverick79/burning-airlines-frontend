@@ -95,7 +95,7 @@ class BookSeats extends React.Component {
                     console.log('I have found a reserved seat', this.state.reservedSeats[i], 'and', this.state.columnList[j]);
                     seatList.push(
 
-                        <p>Seat Reserved by </p>
+                        <label>Seat Reserved</label>
                     )
                 } else {
 
@@ -136,7 +136,7 @@ class BookSeats extends React.Component {
         }
 
 
-        return 143
+       
 
     }
 
