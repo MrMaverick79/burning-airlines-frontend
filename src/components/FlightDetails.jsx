@@ -68,10 +68,13 @@ class FlightDetails extends React.Component {
            {/* notifyParentFlight is for confirmation page 
            
            airplane prop allow us to pass props to the seat booker
+
+           some duplication below with flightDetails and airplane 
            
            */}
                 <p>Book your seat here</p>
-                <BookSeats airplane={this.state.flightDetails.airplane } notifyParentFlight={this.bookDone}/>
+                <BookSeats airplane={this.state.flightDetails.airplane } 
+                flightDetails ={this.state.flightDetails}notifyParentFlight={this.bookDone}/>
 
                
         </div>

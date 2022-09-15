@@ -9,9 +9,9 @@ class BookSeats extends React.Component {
 
     state = {
         flightNumber: null,
-        flightId: 108,
+        flightId: 0,
         columnList: [], //hope to generate a column List
-        rowList: [1,2,3,4,5,6,7,8,9,10], //hope to generate a row list
+        rowSize: 0,  //this is the amount of rows to generate
         row: 0,
         column: '',
         user: 'Kris', 
@@ -19,7 +19,7 @@ class BookSeats extends React.Component {
         user_id: 117 //hardcoded 
     }
 
-    //TODO - find user details from anopther axios request
+    //TODO - find user details from anopther axios request and setState for the user_id &&deal with the FlightId in the smae way. Are these in the AirlinesSearchResult parent?
     
 
     generateRowModel = () => {
@@ -28,7 +28,9 @@ class BookSeats extends React.Component {
         console.log('Seats ', this.props.airplane.total_seats); 
         const newArray = []
         console.log('Columns ', this.props.airplane.column); 
-        console.log('Rows ', this.props.airplane.row); 
+        console.log('Rows ', typeof parseInt(this.props.airplane.row)); 
+
+        const rows = parseInt(this.props.airplane.row);
 
         // Add to the column list (Letters) by iterating and pushing (...) until you hit the this.props.airplane.column . updtateState
         for (let i = 0; i < alpha.length; i++) {
@@ -45,20 +47,20 @@ class BookSeats extends React.Component {
             }
             this.setState({
                 columnList: newArray,
-                total_seats: this.props.airplane.total_seats
+                total_seats: this.props.airplane.total_seats, 
+                rowSize: rows
             })
         }
         
-        //generate a 3d array (of checkboxes??) usimg the column list and the total number of seats. Each seat is i??
-        
+               
         
         
 
-    }
+    } //generate row Model
 
     generateSeatModel = () =>{
         let seatList= []
-        for (let i = 1; i < this.state.total_seats +1; i++) {
+        for (let i = 1; i < this.state.rowSize +1; i++) {
             seatList.push(
             <div className='column_header'>
                 <p>Row: {i}</p>
@@ -68,7 +70,7 @@ class BookSeats extends React.Component {
 
                seatList.push( 
                   <label> {this.state.columnList[j]} 
-                    <input type="radio" row={i} col={this.state.columnList[j]}  onChange={this.handleClick}></input>
+                    <input type="checkbox" row={i} col={this.state.columnList[j]}  onChange={this.handleClick}></input>
                    </label>
 
                  )
@@ -86,8 +88,15 @@ class BookSeats extends React.Component {
         //so our AJAX request 
         //should be initiated from componentDidMount()
         console.log('ComponentDidMount()');
+
+        console.log('The new flightDetails props are ', this.props.flightDetails);
+
+        this.setState({
+            flightId: this.props.flightDetails.id
+        })
         
-       
+     
+
         setTimeout(this.generateRowModel, 1000)
          //below. This runs when the page is loaded, so that you don't have tro wait for the setInterval to run 
          setTimeout(this.generateSeatModel, 2000)
@@ -158,7 +167,7 @@ class BookSeats extends React.Component {
 
         <div className="chooseSeat">
 
-            <h2>Choose your seat</h2>
+            <h2>Hi {this.state.user}. please choose your seat</h2>
 
                 <form onSubmit= {this.handleSubmit }>
                 <div className="seats">
