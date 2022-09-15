@@ -105,3 +105,14 @@ button:hover{
 label{
   font-size: 0.8em;
 }
+
+nav a{
+  border: 2px solid red;
+  padding: 5px;
+  background-color: red;
+  color: white;
+}
+
+nav a:hover{
+  color: black;
+}
