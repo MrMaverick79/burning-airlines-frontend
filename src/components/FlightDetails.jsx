@@ -2,7 +2,7 @@
 import axios from "axios";
 import React from "react";
 import BookSeats from './BookSeats'
-import ReserveDone from "./ReserveDone";
+// import ReserveDone from "./ReserveDone";
 
 const RAILS_FLIGHT_BASE_URL = 'http://localhost:3000/flights/'
 
@@ -49,9 +49,8 @@ class FlightDetails extends React.Component {
     } 
 
     // for confirmation page
-    bookDone = (data) => {
-        this.props.history.push(`/done/${data}`)
-        
+    bookDone = () => {
+        this.props.history.push(`/done`)
     }
 
     
@@ -76,9 +75,7 @@ class FlightDetails extends React.Component {
            */}
                 <p>Book your seat here</p>
                 <BookSeats airplane={this.state.flightDetails.airplane } 
-                flightDetails ={this.state.flightDetails}notifyParentFlight={this.bookDone}/>
-
-                < ReserveDone flight={this.state.flightDetails} />
+                flightDetails ={this.state.flightDetails} notifyParentFlight={this.bookDone}/>
 
                
         </div>

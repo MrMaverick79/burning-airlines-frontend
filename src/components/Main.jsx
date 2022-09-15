@@ -38,7 +38,7 @@ class Main extends React.Component {
                     <Route exact path="/search" component={AirlinesSearch} />
                     <Route exact path="/search/:queryOrigin/:queryDestination" component={AirlinesSearchResults} />
                     <Route exact path="/flights/:queryFlight" component={ FlightDetails } />
-                    <Route exact path="/done/:bookFlight" component={ ReserveDone } />                    
+                    <Route exact path="/done" component={ ReserveDone } />                    
 
                 </Router>
 

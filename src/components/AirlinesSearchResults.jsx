@@ -41,7 +41,7 @@ class AirlinesSearchResults extends React.Component {
 
         try {
             const res =  await axios.get(AIRLINE_FLIGHT_URL);
-            console.log('POST response', res.data);
+            console.log('POST response FlightDetails', res.data);
 
             // decide if the database has that flight
             const desiredFlightsData = [];

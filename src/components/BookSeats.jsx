@@ -16,7 +16,7 @@ class BookSeats extends React.Component {
         column: '',
         user: 'Kris', 
         total_seats: null,
-        user_id: 144 //hardcoded 
+        user_id: 54 //hardcoded 
     }
 
     //TODO - find user details from anopther axios request and setState for the user_id &&deal with the FlightId in the smae way. Are these in the AirlinesSearchResult parent?
@@ -152,7 +152,7 @@ class BookSeats extends React.Component {
         this.postReservation()
 
         // for confirmation page
-        this.props.notifyParentFlight(this.state.flightNumber)
+        this.props.notifyParentFlight()
     }
 
     //this comonent will send a request to the server to make a reservation
